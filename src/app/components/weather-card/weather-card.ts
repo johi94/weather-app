@@ -6,4 +6,9 @@ import { Component } from '@angular/core';
   templateUrl: './weather-card.html',
   styleUrl: './weather-card.scss',
 })
-export class WeatherCard {}
+
+export class WeatherCard {
+  protected readonly city = 'Berlin';
+  protected readonly temperature = 22;
+}
+
