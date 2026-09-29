@@ -1,0 +1,5 @@
+@use '../abstracts' as *;
+
+@include font-face('100', 100);
+@include font-face('regular', 400);
+@include font-face('700', 700);
