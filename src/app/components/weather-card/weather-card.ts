@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { WeatherApi } from '../../services/weather-api';
+
+const LOCATION = { name: 'Puebla', latitude: 19.05, longitude: -98.21 };
 
 @Component({
   selector: 'app-weather-card',
@@ -6,9 +10,11 @@ import { Component } from '@angular/core';
   templateUrl: './weather-card.html',
   styleUrl: './weather-card.scss',
 })
-
 export class WeatherCard {
-  protected readonly city = 'Berlin';
-  protected readonly temperature = 22;
-}
+  private readonly weatherApi = inject(WeatherApi);
 
+  protected readonly city = LOCATION.name;
+  protected readonly weather = toSignal(
+    this.weatherApi.getCurrentWeather(LOCATION.latitude, LOCATION.longitude)
+  );
+}
