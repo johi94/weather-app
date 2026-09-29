@@ -2,7 +2,6 @@ import { Service, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { WeatherResponse } from '../models/weather';
 
-
 const FORECAST_URL = 'https://api.open-meteo.com/v1/forecast';
 
 @Service()
