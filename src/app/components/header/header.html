@@ -1,6 +1,16 @@
 <header class="header">
   <div class="header__inner">
-    <img src="/images/logo.svg" alt="WeatherApp logo" class="header__logo" />
+    <div class="header__brand">
+      <img src="/images/logo.svg" alt="WeatherApp logo" class="header__logo" />
+      <form class="header__search">
+        <input
+          type="text"
+          class="header__search-input"
+          placeholder="Buscar ciudad…"
+          aria-label="Search city"
+        />
+      </form>
+    </div>
     <nav class="header__nav">
       <ul>
         <li><a href="#">Menu Item 1</a></li>
@@ -11,4 +21,3 @@
     </nav>
   </div>
 </header>
-

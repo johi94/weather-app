@@ -13,9 +13,35 @@
     padding-inline: 16px;
 }
 
+.header__brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
 .header__logo {
     height: 40px;
     width: auto;
+}
+
+.header__search-input {
+    width: 240px;
+    height: 30px;
+    padding-inline: 12px;
+    border: 1px solid #555;
+    border-radius: 8px;
+    background-color: #1a1a1a;
+    color: whitesmoke;
+    font: inherit;
+}
+
+.header__search-input::placeholder {
+    color: whitesmoke;
+}
+
+.header__search-input:focus {
+    outline: 2px solid white;
+    outline-offset: 2px;
 }
 
 .header__nav ul {
