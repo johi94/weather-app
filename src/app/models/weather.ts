@@ -4,6 +4,12 @@ export interface CurrentWeather {
   wind_speed_10m: number;
 }
 
+export interface DailyWeather {
+  temperature_2m_max: number[];
+  temperature_2m_min: number[];
+}
+
 export interface WeatherResponse {
   current: CurrentWeather;
+  daily: DailyWeather;
 }
