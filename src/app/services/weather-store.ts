@@ -26,6 +26,7 @@ export class WeatherStore {
   readonly city = computed(() => this.selectedCity().name);
   readonly weather = this.weatherResource.value;
   readonly notFound = this.searchFailed.asReadonly();
+  readonly currentCity = this.selectedCity.asReadonly();
   readonly temperatureFormat = '1.0-0';
 
   search(name: string) {

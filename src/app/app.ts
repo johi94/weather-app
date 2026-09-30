@@ -1,13 +1,14 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { WeatherCard } from './components/weather-card/weather-card';
+import { WeatherMap } from './components/weather-map/weather-map';
 import { Header } from './components/header/header';
 import { Main } from './components/main/main';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, WeatherCard, Header, Main],
+  imports: [RouterOutlet, WeatherCard, Header, Main, WeatherMap],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
