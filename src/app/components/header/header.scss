@@ -77,6 +77,10 @@
     color: $color-text;
 }
 
+.header__icon {
+    @include weather-icon;
+}
+
 .header__city {
     font-weight: 400;
 }

@@ -23,6 +23,11 @@
         }
       </form>
         <p class="header__today">
+          @if (currentConditions(); as conditions) {
+            <span class="header__icon" role="img" [attr.aria-label]="conditions.label">
+              {{ conditions.icon }}
+            </span>
+          }
           <span class="header__city">{{ city() }}</span>
             @if (weather(); as data) {
           <span class="header__range">

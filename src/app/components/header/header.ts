@@ -21,6 +21,7 @@ export class Header {
 
   protected readonly city = this.store.city;
   protected readonly weather = this.store.weather;
+  protected readonly currentConditions = this.store.currentConditions;
   protected readonly temperatureFormat = this.store.temperatureFormat;
   protected readonly query = new FormControl('', {
   nonNullable: true,
