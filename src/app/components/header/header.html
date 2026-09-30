@@ -14,8 +14,8 @@
           <span class="header__city">{{ city }}</span>
             @if (weather(); as data) {
           <span class="header__range">
-            {{ data.daily.temperature_2m_max[0] }}° /
-            {{ data.daily.temperature_2m_min[0] }}°
+            {{ data.daily.temperature_2m_max[0] | number: temperatureFormat }}° /
+            {{ data.daily.temperature_2m_min[0] | number: temperatureFormat }}°
           </span>
         }
         </p>

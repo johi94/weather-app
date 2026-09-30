@@ -1,7 +1,7 @@
 <article class="weather-card container">
   <h2>{{ city }}</h2>
   @if (weather(); as data) {
-    <p>{{ data.current.temperature_2m }}°C</p>
+    <p>{{ data.current.temperature_2m | number: temperatureFormat }}°C</p>
   } @else {
     <p>Loading…</p>
   }

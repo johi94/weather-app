@@ -9,6 +9,7 @@ export class WeatherStore {
   private readonly weatherApi = inject(WeatherApi);
 
   readonly city = LOCATION.name;
+  readonly temperatureFormat = '1.0-0';
   readonly weather = toSignal(
     this.weatherApi.getWeather(LOCATION.latitude, LOCATION.longitude)
   );
