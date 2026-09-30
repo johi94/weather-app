@@ -1,8 +1,13 @@
 <article class="weather-card container">
-  <h2>{{ city }}</h2>
-  @if (weather(); as data) {
-    <p>{{ data.current.temperature_2m | number: temperatureFormat }}°C</p>
+  @if (notFound()) {
+    <p>La búsqueda no dio ningún resultado.	</p>
   } @else {
-    <p>Loading…</p>
+    <h2>{{ city() }}</h2>
+    @if (weather(); as data) {
+      <p>{{ data.current.temperature_2m | number: temperatureFormat }}°C</p>
+    } @else {
+      <p>Cargando…</p>
+    }
   }
 </article>
+

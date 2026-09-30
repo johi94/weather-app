@@ -13,5 +13,6 @@ export class WeatherCard {
 
   protected readonly city = this.store.city;
   protected readonly weather = this.store.weather;
+  protected readonly notFound = this.store.notFound;
   protected readonly temperatureFormat = this.store.temperatureFormat;
 }
