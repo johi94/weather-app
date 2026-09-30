@@ -1,13 +1,35 @@
 <article class="weather-card container">
   @if (notFound()) {
-    <p>La búsqueda no dio ningún resultado.	</p>
+    <p>La búsqueda no dio ningún resultado.</p>
   } @else {
-    <h2>{{ city() }}</h2>
     @if (weather(); as data) {
-      <p>{{ data.current.temperature_2m | number: temperatureFormat }}°C</p>
+      @if (currentConditions(); as conditions) {
+      <div class="weather-card__content">
+        <div class="weather-card__summary">
+          <span class="weather-card__icon" aria-hidden="true">{{ conditions.icon }}</span>
+          <div class="weather-card__main">
+            <h2 class="weather-card__city">{{ city() }}</h2>
+            <p class="weather-card__temp">
+              {{ data.current.temperature_2m | number: temperatureFormat }}°C
+            </p>
+            <p class="weather-card__description">{{ conditions.label }}</p>
+            <p class="weather-card__feels">
+              Sensación térmica: {{ data.current.apparent_temperature | number: temperatureFormat }}°
+            </p>
+          </div>
+        </div>
+          <dl class="weather-card__details">
+            @for (detail of details(); track detail.label) {
+              <div class="weather-card__detail">
+                <dt class="weather-card__detail-label">{{ detail.label }}</dt>
+                <dd class="weather-card__detail-value">{{ detail.value }}</dd>
+              </div>
+          }
+        </dl>
+      </div>
+      }
     } @else {
       <p>Cargando…</p>
     }
   }
 </article>
-
