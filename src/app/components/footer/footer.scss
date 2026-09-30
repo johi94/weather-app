@@ -5,16 +5,20 @@
 }
 
 .footer {
+    display: flex;
+    height: $bar-height;
     background-color: $color-overlay;
     color: $color-text;
 }
 
 .footer__inner {
     display: flex;
+    align-items: center;
     justify-content: center;
-    padding-block: 32px;
 }
 
 .footer__text {
     margin: 0;
+    font-size: clamp(0.875rem, 1.5vw, 1.25rem);
+    text-align: center;
 }
