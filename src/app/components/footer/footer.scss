@@ -1,0 +1,20 @@
+@use '../../../styles/abstracts' as *;
+
+:host {
+    margin-top: auto;
+}
+
+.footer {
+    background-color: $color-overlay;
+    color: $color-text;
+}
+
+.footer__inner {
+    display: flex;
+    justify-content: center;
+    padding-block: 32px;
+}
+
+.footer__text {
+    margin: 0;
+}

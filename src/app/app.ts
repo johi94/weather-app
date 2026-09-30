@@ -5,10 +5,11 @@ import { WeatherMap } from './components/weather-map/weather-map';
 import { Header } from './components/header/header';
 import { Main } from './components/main/main';
 import { WeatherForecast } from './components/weather-forecast/weather-forecast';
+import { Footer } from './components/footer/footer';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, WeatherCard, Header, Main, WeatherMap, WeatherForecast],
+  imports: [RouterOutlet, WeatherCard, Header, Main, WeatherMap, WeatherForecast, Footer],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
