@@ -10,6 +10,9 @@ const ATTRIBUTION = '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &c
 const RADAR_MAX_ZOOM = 7;
 const RADAR_OPACITY = 0.6;
 const RADAR_ATTRIBUTION = '<a href="https://www.rainviewer.com/">RainViewer</a>';
+const CLOUDS_URL = '/api/clouds.php?z={z}&x={x}&y={y}';
+const CLOUDS_OPACITY = 0.8;
+const CLOUDS_ATTRIBUTION = '<a href="https://openweathermap.org/">OpenWeatherMap</a>';
 
 @Component({
   selector: 'app-weather-map',
@@ -35,18 +38,29 @@ export class WeatherMap {
     this.map = L.map(this.mapElement().nativeElement).setView([latitude, longitude], ZOOM);
     L.tileLayer(TILE_URL, { attribution: ATTRIBUTION }).addTo(this.map);
     this.marker = L.circleMarker([latitude, longitude]).addTo(this.map);
-    this.addRainLayer(this.map);
+    this.addWeatherLayers(this.map);
     this.destroyRef.onDestroy(() => this.map?.remove());
   }
 
-  private addRainLayer(map: L.Map) {
+  private addWeatherLayers(map: L.Map) {
+    const clouds = L.tileLayer(CLOUDS_URL, {
+      opacity: CLOUDS_OPACITY,
+      attribution: CLOUDS_ATTRIBUTION,
+    });
+    const layers = L.control
+      .layers(undefined, { Nubes: clouds }, { position: 'bottomleft' })
+      .addTo(map);
+    this.addRainLayer(layers);
+  }
+
+  private addRainLayer(layers: L.Control.Layers) {
     this.weatherApi.getRadarTileUrl().subscribe((url) => {
       const rain = L.tileLayer(url, {
         maxNativeZoom: RADAR_MAX_ZOOM,
         opacity: RADAR_OPACITY,
         attribution: RADAR_ATTRIBUTION,
       });
-      L.control.layers(undefined, { Lluvia: rain }, { position: 'bottomleft' }).addTo(map);
+      layers.addOverlay(rain, 'Lluvia');
     });
   }
 
