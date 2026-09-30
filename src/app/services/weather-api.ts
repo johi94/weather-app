@@ -3,9 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
 import { WeatherResponse } from '../models/weather';
 import { GeocodingResponse } from '../models/city';
+import { RadarResponse } from '../models/radar';
 
 const FORECAST_URL = 'https://api.open-meteo.com/v1/forecast';
 const GEOCODING_URL = 'https://geocoding-api.open-meteo.com/v1/search';
+const RADAR_URL = 'https://api.rainviewer.com/public/weather-maps.json';
 
 @Service()
 export class WeatherApi {
@@ -30,6 +32,15 @@ export class WeatherApi {
         params: { name, count: 1, language: 'es' },
       })
       .pipe(map((response) => response.results?.[0]));
+  }
+
+  getRadarTileUrl() {
+    return this.http.get<RadarResponse>(RADAR_URL).pipe(
+      map(({ host, radar }) => {
+        const latest = radar.past[radar.past.length - 1];
+        return `${host}${latest.path}/256/{z}/{x}/{y}/2/1_1.png`;
+      })
+    );
   }
 }
 
