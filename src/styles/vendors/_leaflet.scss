@@ -1,1 +1,28 @@
 @use 'leaflet/dist/leaflet';
+@use '../abstracts' as *;
+
+.leaflet-control-layers .leaflet-control-layers-toggle {
+  width: 26px;
+  height: 26px;
+  background-size: 20px;
+}
+
+.leaflet-touch .leaflet-control-layers-toggle {
+  width: 30px;
+  height: 30px;
+}
+
+.leaflet-bar a,
+.leaflet-control-layers {
+  background-color: $color-text;
+}
+
+.leaflet-bar a:hover,
+.leaflet-bar a:focus {
+  background-color: #e0e0e0;
+}
+
+.leaflet-control-layers-toggle,
+.leaflet-control-layers label {
+  cursor: pointer;
+}
