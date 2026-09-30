@@ -2,6 +2,8 @@ import { Service, computed, inject, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { WeatherApi } from './weather-api';
 import { City } from '../models/city';
+import { ForecastDay } from '../models/weather';
+import { describeWeather } from '../utils/weather-code';
 
 const DEFAULT_CITY: City = {
   name: 'Puebla',
@@ -28,6 +30,25 @@ export class WeatherStore {
   readonly notFound = this.searchFailed.asReadonly();
   readonly currentCity = this.selectedCity.asReadonly();
   readonly temperatureFormat = '1.0-0';
+  
+  readonly forecast = computed<ForecastDay[]>(() => {
+    const daily = this.weather()?.daily;
+    if (!daily) return [];
+    return daily.time.map((date, i) => ({
+      date,
+      weatherCode: daily.weather_code[i],
+      ...describeWeather(daily.weather_code[i]),
+      max: daily.temperature_2m_max[i],
+      min: daily.temperature_2m_min[i],
+      rainChance: daily.precipitation_probability_max[i],
+    }))
+    .slice(1);
+  });
+
+  readonly currentConditions = computed(() => {
+    const weather = this.weather();
+    return weather ? describeWeather(weather.current.weather_code) : undefined;
+  });
 
   search(name: string) {
   this.weatherApi.searchCity(name).subscribe((city) => {

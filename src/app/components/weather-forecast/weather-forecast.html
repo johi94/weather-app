@@ -1,0 +1,21 @@
+<section class="weather-forecast container">
+  <h2 class="weather-forecast__title">Pronóstico</h2>
+  <ul class="weather-forecast__list">
+    @for (day of forecast(); track day.date) {
+      <li class="weather-forecast__day">
+        <div class="weather-forecast__header">
+          <span class="weather-forecast__icon" role="img" [attr.aria-label]="day.label">
+            {{ day.icon }}
+          </span>
+          <span class="weather-forecast__weekday">{{ day.date | date: 'EEE' }}</span>
+        </div>
+        <span class="weather-forecast__temps">
+          {{ day.max | number: temperatureFormat }}° / {{ day.min | number: temperatureFormat }}°
+        </span>
+        <span class="weather-forecast__rain">
+          <span aria-hidden="true">💧</span> {{ day.rainChance }} %
+        </span>
+      </li>
+    }
+  </ul>
+</section>

@@ -4,14 +4,15 @@ import { WeatherCard } from './components/weather-card/weather-card';
 import { WeatherMap } from './components/weather-map/weather-map';
 import { Header } from './components/header/header';
 import { Main } from './components/main/main';
-
+import { WeatherForecast } from './components/weather-forecast/weather-forecast';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, WeatherCard, Header, Main, WeatherMap],
+  imports: [RouterOutlet, WeatherCard, Header, Main, WeatherMap, WeatherForecast],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
+
 export class App {
   protected readonly title = signal('weather-app');
 }

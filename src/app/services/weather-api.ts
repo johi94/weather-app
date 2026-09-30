@@ -8,6 +8,7 @@ import { RadarResponse } from '../models/radar';
 const FORECAST_URL = 'https://api.open-meteo.com/v1/forecast';
 const GEOCODING_URL = 'https://geocoding-api.open-meteo.com/v1/search';
 const RADAR_URL = 'https://api.rainviewer.com/public/weather-maps.json';
+const FORECAST_DAYS = 7;
 
 @Service()
 export class WeatherApi {
@@ -19,9 +20,9 @@ export class WeatherApi {
         latitude,
         longitude,
         current: 'temperature_2m,weather_code,wind_speed_10m',
-        daily: 'temperature_2m_max,temperature_2m_min',
+        daily: 'weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max',
         timezone: 'auto',
-        forecast_days: 1,
+        forecast_days: FORECAST_DAYS +1,
       },
     });
   }
