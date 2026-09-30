@@ -1,17 +1,14 @@
 @use '../../../styles/abstracts' as *;
 
 .weather-forecast__title {
-    color: $color-surface;
+    margin: 0 0 16px;
     font-weight: 400;
+    color: $color-surface;
 }
 
 .weather-forecast {
     margin-block: 24px;
     color: $color-text;
-}
-
-.weather-forecast__title {
-    margin: 0 0 16px;
 }
 
 .weather-forecast__list {
@@ -31,7 +28,7 @@
     padding: 24px 16px;
     border-radius: 16px;
     background-color: $color-surface;
-    transition: transform 0.2s ease;
+    @include hover-zoom;
 }
 
 .weather-forecast__header {
@@ -42,10 +39,6 @@
 
 .weather-forecast__icon {
     @include weather-icon;
-}
-
-.weather-forecast__day:hover {
-    transform: scale(1.05);
 }
 
 .weather-forecast__weekday {
@@ -62,8 +55,3 @@
     background-color: $color-rain;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .weather-forecast__day {
-        transition: none;
-    }
-}
