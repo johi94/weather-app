@@ -1,3 +1,5 @@
+@use '../../../styles/abstracts' as *;
+
 .header {
     display: flex;
     background-color: rgba(0, 0, 0, 0.4);
@@ -27,16 +29,33 @@
     border: 1px solid #555;
     border-radius: 25px;
     background-color: #1a1a1a;
-    color: whitesmoke;
+    color: $color-text;
     font: inherit;
 }
 
 .header__search-input::placeholder {
-    color: whitesmoke;
+    color: $color-text;
 }
 
 .header__search-input:focus {
     outline: 2px solid white;
     outline-offset: 2px;
 }
+
+.header__today {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin: 0;
+    color: $color-text;
+}
+
+.header__city {
+    font-weight: 400;
+}
+
+.header__range {
+    font-weight: 300;
+}
+
 
