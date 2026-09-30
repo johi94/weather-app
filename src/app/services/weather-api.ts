@@ -1,8 +1,11 @@
 import { Service, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs';
 import { WeatherResponse } from '../models/weather';
+import { GeocodingResponse } from '../models/city';
 
 const FORECAST_URL = 'https://api.open-meteo.com/v1/forecast';
+const GEOCODING_URL = 'https://geocoding-api.open-meteo.com/v1/search';
 
 @Service()
 export class WeatherApi {
@@ -20,4 +23,15 @@ export class WeatherApi {
       },
     });
   }
+
+  searchCity(name: string) {
+    return this.http
+      .get<GeocodingResponse>(GEOCODING_URL, {
+        params: { name, count: 1, language: 'es' },
+      })
+      .pipe(map((response) => response.results?.[0]));
+  }
 }
+
+
+
