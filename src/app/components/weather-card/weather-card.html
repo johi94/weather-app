@@ -1,35 +1,37 @@
 <article class="weather-card container">
-  @if (notFound()) {
-    <p>La búsqueda no dio ningún resultado.</p>
-  } @else {
-    @if (weather(); as data) {
-      @if (currentConditions(); as conditions) {
+  @if (weather(); as data) {
+    @if (currentConditions(); as conditions) {
       <div class="weather-card__content">
-        <div class="weather-card__summary">
-          <span class="weather-card__icon" aria-hidden="true">{{ conditions.icon }}</span>
-          <div class="weather-card__main">
-            <h2 class="weather-card__city">{{ city() }}</h2>
-            <p class="weather-card__temp">
-              {{ data.current.temperature_2m | number: temperatureFormat }}°C
-            </p>
-            <p class="weather-card__description">{{ conditions.label }}</p>
-            <p class="weather-card__feels">
-              Sensación térmica: {{ data.current.apparent_temperature | number: temperatureFormat }}°
-            </p>
+        <div class="weather-card__body" [class.weather-card__body--hidden]="notFound()">
+          <div class="weather-card__summary">
+            <span class="weather-card__icon" aria-hidden="true">{{ conditions.icon }}</span>
+            <div class="weather-card__main">
+              <h2 class="weather-card__city">{{ city() }}</h2>
+              <p class="weather-card__temp">
+                {{ data.current.temperature_2m | number: temperatureFormat }}°C
+              </p>
+              <p class="weather-card__description">{{ conditions.label }}</p>
+              <p class="weather-card__feels">
+                Sensación térmica: {{ data.current.apparent_temperature | number: temperatureFormat }}°
+              </p>
+            </div>
           </div>
-        </div>
           <dl class="weather-card__details">
             @for (detail of details(); track detail.label) {
               <div class="weather-card__detail">
                 <dt class="weather-card__detail-label">{{ detail.label }}</dt>
                 <dd class="weather-card__detail-value">{{ detail.value }}</dd>
               </div>
-          }
-        </dl>
+            }
+          </dl>
+        </div>
+        @if (notFound()) {
+          <p class="weather-card__message" role="alert">La búsqueda no dio ningún resultado.</p>
+        }
       </div>
-      }
-    } @else {
-      <p>Cargando…</p>
     }
+  } @else {
+    <p>Cargando…</p>
   }
 </article>
+
