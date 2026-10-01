@@ -22,3 +22,7 @@
     font-size: clamp($font-size-min, 1.5vw, 1.25rem);
     text-align: center;
 }
+
+.footer__line {
+    white-space: nowrap;
+}
