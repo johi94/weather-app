@@ -63,6 +63,10 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 12px;
     margin: 0;
+
+    @include respond-to(mobile) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .weather-card__detail {
@@ -80,10 +84,4 @@
 .weather-card__detail-value {
     margin: 0;
     font-weight: 700;
-}
-
-@media (max-width: 600px) {
-    .weather-card__details {
-        grid-template-columns: repeat(2, 1fr);
-    }
 }

@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use 'variables' as *;
 
 @mixin font-face($variant, $weight) {
@@ -22,5 +23,11 @@
   }
   @media (prefers-reduced-motion: reduce) {
     transition: none;
+  }
+}
+
+@mixin respond-to($name) {
+  @media (max-width: map.get($breakpoints, $name)) {
+    @content;
   }
 }

@@ -10,3 +10,8 @@ $color-rain: #3b82c4;
 $color-overlay: rgba(0, 0, 0, 0.4);
 
 $bar-height: 15dvh;
+
+$breakpoints: (
+  mobile: 600px,
+  tablet: 768px,
+);
