@@ -31,3 +31,18 @@
   font-family: inherit;
   font-size: $font-size-min;
 }
+
+.leaflet-control-attribution {
+  @include respond-to(tablet) {
+    &:not(:hover):not(:focus-within) {
+      max-width: 1.5em;
+      overflow: hidden;
+      white-space: nowrap;
+      cursor: pointer;
+
+      &::before {
+        content: 'ⓘ ';
+      }
+    }
+  }
+}
