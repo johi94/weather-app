@@ -4,6 +4,7 @@ import { WeatherApi } from './weather-api';
 import { City } from '../models/city';
 import { ForecastDay } from '../models/weather';
 import { describeWeather } from '../utils/weather-code';
+import { getBrowserCoords } from '../utils/browser-location';
 
 const DEFAULT_CITY: City = {
   name: 'Puebla',
@@ -49,6 +50,20 @@ export class WeatherStore {
     const weather = this.weather();
     return weather ? describeWeather(weather.current.weather_code) : undefined;
   });
+
+  constructor() {
+    this.locateUser();
+  }
+
+  private async locateUser() {
+    const coords = await getBrowserCoords();
+    this.weatherApi.reverseGeocode(coords).subscribe({
+      next: (city) => {
+        if (this.selectedCity() === DEFAULT_CITY) this.selectedCity.set(city);
+      },
+      error: () => console.warn('No se pudo determinar la ubicación.'),
+    });
+  }
 
   search(name: string) {
   this.weatherApi.searchCity(name).subscribe((city) => {
