@@ -34,11 +34,10 @@ export class WeatherMap {
   }
 
   private createMap() {
-    const { latitude, longitude } = this.store.currentCity();
-    this.map = L.map(this.mapElement().nativeElement).setView([latitude, longitude], ZOOM);
+    this.map = L.map(this.mapElement().nativeElement);
     L.tileLayer(TILE_URL, { attribution: ATTRIBUTION }).addTo(this.map);
-    this.marker = L.circleMarker([latitude, longitude]).addTo(this.map);
     this.addWeatherLayers(this.map);
+    this.moveTo(this.store.currentCity());
     this.destroyRef.onDestroy(() => this.map?.remove());
   }
 
@@ -64,9 +63,15 @@ export class WeatherMap {
     });
   }
 
-  private moveTo({ latitude, longitude }: City) {
-    this.map?.flyTo([latitude, longitude], ZOOM);
-    this.marker?.setLatLng([latitude, longitude]);
+  private moveTo(city?: City) {
+    if (!city || !this.map) return;
+    const position: L.LatLngTuple = [city.latitude, city.longitude];
+    if (this.marker) {
+      this.map.flyTo(position, ZOOM);
+      this.marker.setLatLng(position);
+    } else {
+      this.map.setView(position, ZOOM);
+      this.marker = L.circleMarker(position).addTo(this.map);
+    }
   }
 }
-

@@ -17,7 +17,7 @@ const DEFAULT_CITY: City = {
 @Service()
 export class WeatherStore {
   private readonly weatherApi = inject(WeatherApi);
-  private readonly selectedCity = signal(DEFAULT_CITY);
+  private readonly selectedCity = signal<City | undefined>(undefined);
   private readonly searchFailed = signal(false);
 
   private readonly weatherResource = rxResource({
@@ -26,7 +26,7 @@ export class WeatherStore {
       this.weatherApi.getWeather(params.latitude, params.longitude),
   });
 
-  readonly city = computed(() => this.selectedCity().name);
+  readonly city = computed(() => this.selectedCity()?.name);
   readonly weather = this.weatherResource.value;
   readonly notFound = this.searchFailed.asReadonly();
   readonly currentCity = this.selectedCity.asReadonly();
@@ -58,11 +58,13 @@ export class WeatherStore {
   private async locateUser() {
     const coords = await getBrowserCoords();
     this.weatherApi.reverseGeocode(coords).subscribe({
-      next: (city) => {
-        if (this.selectedCity() === DEFAULT_CITY) this.selectedCity.set(city);
-      },
-      error: () => console.warn('No se pudo determinar la ubicación.'),
+      next: (city) => this.useStartCity(city),
+      error: () => this.useStartCity(DEFAULT_CITY),
     });
+  }
+
+  private useStartCity(city: City) {
+    if (!this.selectedCity()) this.selectedCity.set(city);
   }
 
   search(name: string) {
