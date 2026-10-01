@@ -2,12 +2,14 @@ import { Service, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
 import { WeatherResponse } from '../models/weather';
-import { GeocodingResponse } from '../models/city';
 import { RadarResponse } from '../models/radar';
+import { City, Coordinates, GeocodingResponse } from '../models/city';
+import { ReverseGeocodeResponse } from '../models/reverse-geocode';
 
 const FORECAST_URL = 'https://api.open-meteo.com/v1/forecast';
 const GEOCODING_URL = 'https://geocoding-api.open-meteo.com/v1/search';
 const RADAR_URL = 'https://api.rainviewer.com/public/weather-maps.json';
+const REVERSE_GEOCODE_URL = 'https://api.bigdatacloud.net/data/reverse-geocode-client';
 const FORECAST_DAYS = 7;
 
 @Service()
@@ -46,6 +48,22 @@ export class WeatherApi {
         return `${host}${latest.path}/256/{z}/{x}/{y}/2/1_1.png`;
       })
     );
+  }
+
+  reverseGeocode(coords?: Coordinates) {
+    return this.http
+      .get<ReverseGeocodeResponse>(REVERSE_GEOCODE_URL, {
+        params: { ...coords, localityLanguage: 'es' },
+      })
+      .pipe(
+        map((response): City => ({
+          name: response.city || response.locality,
+          latitude: response.latitude,
+          longitude: response.longitude,
+          country_code: response.countryCode,
+          admin1: response.principalSubdivision,
+        }))
+      );
   }
 }
 

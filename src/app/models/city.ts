@@ -9,3 +9,5 @@ export interface City {
 export interface GeocodingResponse {
   results?: City[];
 }
+
+export type Coordinates = Pick<City, 'latitude' | 'longitude'>;
