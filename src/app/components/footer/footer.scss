@@ -19,6 +19,6 @@
 
 .footer__text {
     margin: 0;
-    font-size: clamp(0.875rem, 1.5vw, 1.25rem);
+    font-size: clamp($font-size-min, 1.5vw, 1.25rem);
     text-align: center;
 }

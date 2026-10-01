@@ -26,3 +26,8 @@
 .leaflet-control-layers label {
   cursor: pointer;
 }
+
+.leaflet-container {
+  font-family: inherit;
+  font-size: $font-size-min;
+}
