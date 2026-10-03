@@ -4,6 +4,7 @@ import { AbstractControl, FormControl, ReactiveFormsModule, Validators } from '@
 import { WeatherStore } from '../../services/weather-store';
 import { LanguageStore } from '../../services/language-store';
 import { LANGUAGES, LANGUAGE_NAMES, Language } from '../../i18n/language';
+import { APP_NAME } from '../../app-name';
 
 const CITY_PATTERN = /^[\p{L}\s.'-]+$/u;
 const REPEATED_CHARS = /^(.)\1+$/i;
@@ -45,6 +46,8 @@ export class Header {
   }
 
   protected readonly invalidInput = signal(false);
+  protected readonly appName = APP_NAME;
+
 
   /**
    * Handles the search form submit: validates the input and starts the search,

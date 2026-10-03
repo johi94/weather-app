@@ -1,6 +1,6 @@
 export const es = {
   header: {
-    logoAlt: 'Logotipo de WeatherApp',
+    logoAlt: (name: string) => `Logotipo de ${name}`,
     searchPlaceholder: 'Buscar ciudad…',
     searchLabel: 'Buscar ciudad',
     searchButton: 'Buscar',

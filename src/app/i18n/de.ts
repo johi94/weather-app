@@ -2,7 +2,7 @@ import { Translations } from './es';
 
 export const de: Translations = {
   header: {
-    logoAlt: 'WeatherApp-Logo',
+    logoAlt: (name: string) => `${name}-Logo`,
     searchPlaceholder: 'Stadt suchen…',
     searchLabel: 'Stadt suchen',
     searchButton: 'Suchen',
