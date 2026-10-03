@@ -45,6 +45,7 @@ export class WeatherMap {
     effect(() => this.updateLayersControl(this.languageStore.t().map));
   }
 
+  /** Creates the Leaflet map once the template is rendered; position follows via `moveTo`. */
   private createMap() {
     this.map = L.map(this.mapElement().nativeElement);
     L.tileLayer(TILE_URL, { attribution: ATTRIBUTION }).addTo(this.map);
@@ -54,6 +55,7 @@ export class WeatherMap {
     this.destroyRef.onDestroy(() => this.map?.remove());
   }
 
+  /** Loads the latest radar image and adds it to the layer control as soon as it is available. */
   private loadRainLayer() {
     this.weatherApi.getRadarTileUrl().subscribe((url) => {
       this.rain = L.tileLayer(url, {
@@ -65,6 +67,11 @@ export class WeatherMap {
     });
   }
 
+  /**
+   * Rebuilds the layer control with translated layer names.
+   * Leaflet cannot rename layers, so the control is replaced; active layers stay on the map.
+   * @param labels Layer names of the current language.
+   */
   private updateLayersControl(labels: Translations['map']) {
     if (!this.map) return;
     this.layersControl?.remove();
@@ -76,6 +83,10 @@ export class WeatherMap {
   }
 
 
+  /**
+   * Shows the given city on the map. The first city is set directly,
+   * later cities are reached with a fly animation.
+   */
   private moveTo(city?: City) {
     if (!city || !this.map) return;
     const position: L.LatLngTuple = [city.latitude, city.longitude];

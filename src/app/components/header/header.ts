@@ -8,6 +8,11 @@ import { LANGUAGES, LANGUAGE_NAMES, Language } from '../../i18n/language';
 const CITY_PATTERN = /^[\p{L}\s.'-]+$/u;
 const REPEATED_CHARS = /^(.)\1+$/i;
 
+/**
+ * Form validator that rejects input made of one repeated character (e.g. "bbb"),
+ * which the geocoding API would otherwise match to airport codes.
+ * @returns `{ repeated: true }` if invalid, otherwise `null`.
+ */
 function notRepeated(control: AbstractControl) {
   return REPEATED_CHARS.test(control.value.trim()) ? { repeated: true } : null;
 }
@@ -41,6 +46,10 @@ export class Header {
 
   protected readonly invalidInput = signal(false);
 
+  /**
+   * Handles the search form submit: validates the input and starts the search,
+   * or shows the validation hint if the input is empty or invalid.
+   */
   protected search(event: Event) {
   event.preventDefault();
   const city = this.query.value.trim();

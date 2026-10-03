@@ -8,6 +8,7 @@ import { Translations } from '../../i18n/es';
 
 const PLACEHOLDER = '–';
 
+/** One tile in the detail grid: its label and how to format its value. */
 interface WeatherDetail {
   labelKey: keyof Translations['card'];
   format: (data: WeatherResponse, locale: string, t: Translations) => string;

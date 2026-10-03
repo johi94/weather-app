@@ -17,6 +17,10 @@ const FORECAST_DAYS = 7;
 export class WeatherApi {
   private readonly http = inject(HttpClient);
 
+  /**
+   * Loads current conditions and the daily forecast (today plus `FORECAST_DAYS`) from Open-Meteo.
+   * Times are returned in the local time zone of the location.
+   */
   getWeather(latitude: number, longitude: number) {
     return this.http.get<WeatherResponse>(FORECAST_URL, {
       params: {
@@ -34,6 +38,12 @@ export class WeatherApi {
     });
   }
 
+  /**
+   * Finds the best matching city for a name via the Open-Meteo geocoding API.
+   * @param name City name entered by the user.
+   * @param language Language for the returned place names.
+   * @returns The first match, or `undefined` if nothing was found.
+   */
   searchCity(name: string, language: Language) {
     return this.http
       .get<GeocodingResponse>(GEOCODING_URL, {
@@ -43,6 +53,11 @@ export class WeatherApi {
   }
 
 
+  /**
+   * Builds the Leaflet tile URL of the latest RainViewer radar image.
+   * The path changes about every 10 minutes, so it has to be requested first.
+   * @returns A tile URL template with `{z}`, `{x}` and `{y}` placeholders.
+   */
   getRadarTileUrl() {
     return this.http.get<RadarResponse>(RADAR_URL).pipe(
       map(({ host, radar }) => {
@@ -52,6 +67,13 @@ export class WeatherApi {
     );
   }
 
+  /**
+   * Resolves a place via BigDataCloud. Without coordinates the service falls back to the
+   * visitor's IP address. Only use this for the device location (BigDataCloud fair use policy).
+   * @param language Language for the returned place names.
+   * @param coords Device coordinates from the browser; omit to use IP-based location.
+   * @returns The place as a `City`.
+   */
   reverseGeocode(language: Language, coords?: Coordinates) {
     return this.http
       .get<ReverseGeocodeResponse>(REVERSE_GEOCODE_URL, {

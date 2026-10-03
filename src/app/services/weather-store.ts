@@ -34,6 +34,7 @@ export class WeatherStore {
   readonly currentCity = this.selectedCity.asReadonly();
   readonly temperatureFormat = '1.0-0';
   
+  /** Forecast for the next days as one object per day; today is skipped. */
   readonly forecast = computed<ForecastDay[]>(() => {
     const daily = this.weather()?.daily;
     const labels = this.languageStore.t().weather;
@@ -61,6 +62,10 @@ export class WeatherStore {
     this.locateUser();
   }
 
+  /**
+   * Determines the start city: device location if allowed, otherwise IP-based location,
+   * and `DEFAULT_CITY` if both fail.
+   */
   private async locateUser() {
     const coords = await getBrowserCoords();
     this.weatherApi.reverseGeocode(this.languageStore.language(), coords).subscribe({
@@ -69,10 +74,16 @@ export class WeatherStore {
     });
   }
 
+  /** Sets the start city unless the user has already searched for one. */
   private useStartCity(city: City) {
     if (!this.selectedCity()) this.selectedCity.set(city);
   }
 
+  /**
+   * Searches a city and makes it the selected city. If nothing is found,
+   * the previous city stays selected and `notFound` becomes `true`.
+   * @param name City name entered by the user.
+   */
   search(name: string) {
   this.weatherApi.searchCity(name, this.languageStore.language()).subscribe((city) => {
     this.searchFailed.set(!city);
