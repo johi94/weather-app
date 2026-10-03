@@ -3,6 +3,7 @@ import { DecimalPipe } from '@angular/common';
 import { AbstractControl, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WeatherStore } from '../../services/weather-store';
 import { LanguageStore } from '../../services/language-store';
+import { LANGUAGES, LANGUAGE_NAMES, Language } from '../../i18n/language';
 
 const CITY_PATTERN = /^[\p{L}\s.'-]+$/u;
 const REPEATED_CHARS = /^(.)\1+$/i;
@@ -22,6 +23,9 @@ export class Header {
   private readonly languageStore = inject(LanguageStore);
 
   protected readonly t = this.languageStore.t;
+  protected readonly languages = LANGUAGES;
+  protected readonly languageNames = LANGUAGE_NAMES;
+  protected readonly currentLanguage = this.languageStore.language;
   protected readonly city = this.store.city;
   protected readonly weather = this.store.weather;
   protected readonly currentConditions = this.store.currentConditions;
@@ -30,6 +34,10 @@ export class Header {
   nonNullable: true,
   validators: [Validators.pattern(CITY_PATTERN), notRepeated],
 });
+
+  protected setLanguage(language: Language) {
+    this.languageStore.setLanguage(language);
+  }
 
   protected readonly invalidInput = signal(false);
 

@@ -6,6 +6,7 @@ export const de: Translations = {
     searchPlaceholder: 'Stadt suchen…',
     searchLabel: 'Stadt suchen',
     searchButton: 'Suchen',
+    languageLabel: 'Sprache',
     invalidCity: 'Ungültige Stadt.',
   },
   card: {

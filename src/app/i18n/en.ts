@@ -6,6 +6,7 @@ export const en: Translations = {
     searchPlaceholder: 'Search city…',
     searchLabel: 'Search city',
     searchButton: 'Search',
+    languageLabel: 'Language',
     invalidCity: 'Invalid city.',
   },
   card: {

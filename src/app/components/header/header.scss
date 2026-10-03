@@ -106,3 +106,31 @@
     font-weight: 300;
     white-space: nowrap;
 }
+
+.header__languages {
+    position: absolute;
+    top: 100%;
+    right: 16px;
+    display: flex;
+    gap: 4px;
+    margin-top: 6px;
+}
+
+.header__language {
+    padding: 0;
+    border: none;
+    background: none;
+    color: $color-text-muted;
+    font: inherit;
+    cursor: pointer;
+
+    & + &::before {
+        content: '/';
+        margin-right: 4px;
+    }
+}
+
+.header__language--active {
+    color: $color-text;
+    font-weight: 700;
+}

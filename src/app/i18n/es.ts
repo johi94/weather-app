@@ -4,6 +4,7 @@ export const es = {
     searchPlaceholder: 'Buscar ciudad…',
     searchLabel: 'Buscar ciudad',
     searchButton: 'Buscar',
+    languageLabel: 'Idioma',
     invalidCity: 'Ciudad no válida.',
   },
   card: {
