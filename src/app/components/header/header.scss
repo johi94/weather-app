@@ -1,136 +1,136 @@
 @use '../../../styles/abstracts' as *;
 
 .header {
-    display: flex;
-    background-color: $color-overlay;
-    min-height: $bar-height;
+  display: flex;
+  background-color: $color-overlay;
+  min-height: $bar-height;
 }
 
 .header__inner {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .header__brand {
-    display: flex;
-    flex: 1;
-    align-items: center;
-    gap: 16px;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 16px;
 }
 
 .header__logo {
-    height: 12dvh;
-    width: auto;
+  height: 12dvh;
+  width: auto;
 
-    @include respond-to(mobile) {
-        height: 64px;
-    }
+  @include respond-to(mobile) {
+    height: 64px;
+  }
 }
 
 .header__controls {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap-reverse;
-    align-items: center;
-    gap: 8px 16px;
-    min-width: 0;
-        padding-bottom: 3.5rem;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap-reverse;
+  align-items: center;
+  gap: 8px 16px;
+  min-width: 0;
+  padding-bottom: 3.5rem;
 }
 
 .header__search {
-    position: relative;
-    flex: 0 1 300px;
-    min-width: 0;
+  position: relative;
+  flex: 0 1 300px;
+  min-width: 0;
 }
 
 .header__search-input {
-    width: 100%;
-    height: 50px;
-    padding-inline: 16px 48px;
-    border: 1px solid #555;
-    border-radius: 25px;
-    background-color: $color-surface;
-    color: $color-text;
-    font: inherit;
+  width: 100%;
+  height: 50px;
+  padding-inline: 16px 48px;
+  border: 1px solid #555;
+  border-radius: 25px;
+  background-color: $color-surface;
+  color: $color-text;
+  font: inherit;
 }
 
 .header__search-input::placeholder {
-    color: $color-text-muted;
+  color: $color-text-muted;
 }
 
 .header__search-input:focus {
-    outline: 2px solid white;
-    outline-offset: 2px;
+  outline: 2px solid white;
+  outline-offset: 2px;
 }
 
 .header__search-button {
-    position: absolute;
-    top: 50%;
-    right: 16px;
-    transform: translateY(-50%);
-    display: flex;
-    padding: 0;
-    border: none;
-    background: none;
-    color: $color-text;
-    cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  display: flex;
+  padding: 0;
+  border: none;
+  background: none;
+  color: $color-text;
+  cursor: pointer;
 }
 
 .header__search-hint {
-    position: absolute;
-    top: 100%;
-    left: 16px;
-    right: 16px;
-    margin: 6px 0 0;
-    font-size: $font-size-min;
-    color: $color-error;
+  position: absolute;
+  top: 100%;
+  left: 16px;
+  right: 16px;
+  margin: 6px 0 0;
+  font-size: $font-size-min;
+  color: $color-error;
 }
 
 .header__today {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 0;
-    color: $color-text;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  color: $color-text;
 }
 
 .header__icon {
-    @include weather-icon;
+  @include weather-icon;
 }
 
 .header__city {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 .header__range {
-    font-weight: 300;
-    white-space: nowrap;
+  font-weight: 300;
+  white-space: nowrap;
 }
 
 .header__languages {
-    position: absolute;
-    top: 100%;
-    right: 16px;
-    display: flex;
-    gap: 4px;
-    margin-top: 1.75rem;
+  position: absolute;
+  top: 100%;
+  right: 16px;
+  display: flex;
+  gap: 4px;
+  margin-top: 1.75rem;
 }
 
 .header__language {
-    padding: 0;
-    border: none;
-    background: none;
-    color: $color-text-muted;
-    font: inherit;
-    cursor: pointer;
+  padding: 0;
+  border: none;
+  background: none;
+  color: $color-text-muted;
+  font: inherit;
+  cursor: pointer;
 
-    & + &::before {
-        content: '/';
-        margin-right: 4px;
-    }
+  & + &::before {
+    content: '/';
+    margin-right: 4px;
+  }
 }
 
 .header__language--active {
-    color: $color-text;
-    font-weight: 700;
+  color: $color-text;
+  font-weight: 700;
 }

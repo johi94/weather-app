@@ -1,28 +1,28 @@
 @use '../../../styles/abstracts' as *;
 
 :host {
-    margin-top: auto;
+  margin-top: auto;
 }
 
 .footer {
-    display: flex;
-    height: $bar-height;
-    background-color: $color-overlay;
-    color: $color-text;
+  display: flex;
+  height: $bar-height;
+  background-color: $color-overlay;
+  color: $color-text;
 }
 
 .footer__inner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .footer__text {
-    margin: 0;
-    font-size: clamp($font-size-min, 1.5vw, 1.25rem);
-    text-align: center;
+  margin: 0;
+  font-size: clamp($font-size-min, 1.5vw, 1.25rem);
+  text-align: center;
 }
 
 .footer__line {
-    white-space: nowrap;
+  white-space: nowrap;
 }

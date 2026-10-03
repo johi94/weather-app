@@ -4,7 +4,9 @@
   <div class="weather-card__content">
     <div class="weather-card__body" [class.weather-card__body--hidden]="!data || notFound()">
       <div class="weather-card__summary">
-        <span class="weather-card__icon" aria-hidden="true">{{ conditions?.icon ?? placeholder }}</span>
+        <span class="weather-card__icon" aria-hidden="true">{{
+          conditions?.icon ?? placeholder
+        }}</span>
         <div class="weather-card__main">
           <h2 class="weather-card__city">{{ city() ?? placeholder }}</h2>
           <p class="weather-card__temp">
@@ -12,7 +14,10 @@
           </p>
           <p class="weather-card__description">{{ conditions?.label ?? placeholder }}</p>
           <p class="weather-card__feels">
-            {{ t().card.feelsLike }}: {{ data ? (data.current.apparent_temperature | number: temperatureFormat) : placeholder }}°
+            {{ t().card.feelsLike }}:
+            {{
+              data ? (data.current.apparent_temperature | number: temperatureFormat) : placeholder
+            }}°
           </p>
         </div>
       </div>
@@ -32,4 +37,3 @@
     }
   </div>
 </article>
-

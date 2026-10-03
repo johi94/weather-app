@@ -25,8 +25,7 @@ export class WeatherStore {
 
   private readonly weatherResource = rxResource({
     params: () => this.selectedCity(),
-    stream: ({ params }) =>
-      this.weatherApi.getWeather(params.latitude, params.longitude),
+    stream: ({ params }) => this.weatherApi.getWeather(params.latitude, params.longitude),
   });
 
   readonly city = computed(() => this.selectedCity()?.name);
@@ -35,7 +34,7 @@ export class WeatherStore {
   readonly currentCity = this.selectedCity.asReadonly();
   /** `DecimalPipe` format for temperatures: whole numbers without decimals. */
   readonly temperatureFormat = '1.0-0';
-  
+
   /** Forecast for the next days as one object per day; today is skipped. */
   readonly forecast = computed<ForecastDay[]>(() => {
     const daily = this.weather()?.daily;
@@ -46,11 +45,11 @@ export class WeatherStore {
         date,
         weatherCode: daily.weather_code[i],
         ...describeWeather(daily.weather_code[i], labels),
-      max: daily.temperature_2m_max[i],
-      min: daily.temperature_2m_min[i],
-      rainChance: daily.precipitation_probability_max[i],
-    }))
-    .slice(1);
+        max: daily.temperature_2m_max[i],
+        min: daily.temperature_2m_min[i],
+        rainChance: daily.precipitation_probability_max[i],
+      }))
+      .slice(1);
   });
 
   /** Icon and translated description of the weather right now. */
@@ -88,9 +87,9 @@ export class WeatherStore {
    * @param name City name entered by the user.
    */
   search(name: string) {
-  this.weatherApi.searchCity(name, this.languageStore.language()).subscribe((city) => {
-    this.searchFailed.set(!city);
-    if (city) this.selectedCity.set(city);
-  });
-}
+    this.weatherApi.searchCity(name, this.languageStore.language()).subscribe((city) => {
+      this.searchFailed.set(!city);
+      if (city) this.selectedCity.set(city);
+    });
+  }
 }

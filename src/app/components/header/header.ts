@@ -37,9 +37,9 @@ export class Header {
   protected readonly currentConditions = this.store.currentConditions;
   protected readonly temperatureFormat = this.store.temperatureFormat;
   protected readonly query = new FormControl('', {
-  nonNullable: true,
-  validators: [Validators.pattern(CITY_PATTERN), notRepeated],
-});
+    nonNullable: true,
+    validators: [Validators.pattern(CITY_PATTERN), notRepeated],
+  });
 
   protected setLanguage(language: Language) {
     this.languageStore.setLanguage(language);
@@ -48,17 +48,15 @@ export class Header {
   protected readonly invalidInput = signal(false);
   protected readonly appName = APP_NAME;
 
-
   /**
    * Handles the search form submit: validates the input and starts the search,
    * or shows the validation hint if the input is empty or invalid.
    */
   protected search(event: Event) {
-  event.preventDefault();
-  const city = this.query.value.trim();
-  const valid = !!city && this.query.valid;
-  this.invalidInput.set(!valid);
-  if (valid) this.store.search(city);
+    event.preventDefault();
+    const city = this.query.value.trim();
+    const valid = !!city && this.query.valid;
+    this.invalidInput.set(!valid);
+    if (valid) this.store.search(city);
+  }
 }
-}
-

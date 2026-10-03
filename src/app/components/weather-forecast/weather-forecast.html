@@ -7,7 +7,9 @@
           <span class="weather-forecast__icon" role="img" [attr.aria-label]="day.label">
             {{ day.icon }}
           </span>
-          <span class="weather-forecast__weekday">{{ day.date | date: 'EEE' : undefined : language() }}</span>
+          <span class="weather-forecast__weekday">{{
+            day.date | date: 'EEE' : undefined : language()
+          }}</span>
         </div>
         <span class="weather-forecast__temps">
           {{ day.max | number: temperatureFormat }}° / {{ day.min | number: temperatureFormat }}°

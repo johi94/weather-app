@@ -29,7 +29,7 @@ export const es = {
     clouds: 'Nubes',
     rain: 'Lluvia',
   },
-    weather: {
+  weather: {
     clear: 'Despejado',
     mainlyClear: 'Mayormente despejado',
     partlyCloudy: 'Parcialmente nublado',

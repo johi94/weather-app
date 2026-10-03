@@ -52,7 +52,6 @@ export class WeatherApi {
       .pipe(map((response) => response.results?.[0]));
   }
 
-
   /**
    * Builds the Leaflet tile URL of the latest RainViewer radar image.
    * The path changes about every 10 minutes, so it has to be requested first.
@@ -63,7 +62,7 @@ export class WeatherApi {
       map(({ host, radar }) => {
         const latest = radar.past[radar.past.length - 1];
         return `${host}${latest.path}/256/{z}/{x}/{y}/2/1_1.png`;
-      })
+      }),
     );
   }
 
@@ -86,10 +85,7 @@ export class WeatherApi {
           longitude: response.longitude,
           country_code: response.countryCode,
           admin1: response.principalSubdivision,
-        }))
+        })),
       );
   }
 }
-
-
-

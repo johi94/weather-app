@@ -38,4 +38,3 @@ export interface ForecastDay {
   min: number;
   rainChance: number;
 }
-

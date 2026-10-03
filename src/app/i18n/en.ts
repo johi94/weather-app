@@ -30,7 +30,7 @@ export const en: Translations = {
     clouds: 'Clouds',
     rain: 'Rain',
   },
-    weather: {
+  weather: {
     clear: 'Clear sky',
     mainlyClear: 'Mainly clear',
     partlyCloudy: 'Partly cloudy',

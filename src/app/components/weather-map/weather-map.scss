@@ -1,11 +1,11 @@
 @use '../../../styles/abstracts' as *;
 
 .weather-map {
-    margin-block: 24px;
+  margin-block: 24px;
 }
 
 .weather-map__canvas {
-    height: 400px;
-    border-radius: 16px;
-    background-color: $color-surface;
+  height: 400px;
+  border-radius: 16px;
+  background-color: $color-surface;
 }

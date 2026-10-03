@@ -1,89 +1,89 @@
 @use '../../../styles/abstracts' as *;
 
 .weather-card__content {
-    display: grid;
-    margin-block: 24px;
-    padding: 24px;
-    border-radius: 16px;
-    background-color: $color-surface;
-    color: $color-text;
+  display: grid;
+  margin-block: 24px;
+  padding: 24px;
+  border-radius: 16px;
+  background-color: $color-surface;
+  color: $color-text;
 }
 
 .weather-card__body,
 .weather-card__message {
-    grid-area: 1 / 1;
+  grid-area: 1 / 1;
 }
 
 .weather-card__body {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 32px;
 }
 
 .weather-card__body--hidden {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .weather-card__message {
-    align-self: center;
-    justify-self: center;
-    margin: 0;
+  align-self: center;
+  justify-self: center;
+  margin: 0;
 }
 
 .weather-card__summary {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .weather-card__icon {
-    @include weather-icon(4rem);
+  @include weather-icon(4rem);
 }
 
 .weather-card__city,
 .weather-card__temp,
 .weather-card__description,
 .weather-card__feels {
-    margin: 0;
+  margin: 0;
 }
 
 .weather-card__temp {
-    font-size: 3rem;
-    font-weight: 300;
+  font-size: 3rem;
+  font-weight: 300;
 }
 
 .weather-card__feels {
-    color: $color-text-muted;
+  color: $color-text-muted;
 }
 
 .weather-card__details {
-    flex: 1 1 400px;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-    margin: 0;
+  flex: 1 1 400px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
 
-    @include respond-to(mobile) {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+  @include respond-to(mobile) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .weather-card__detail {
-    padding: 12px;
-    border-radius: 8px;
-    background-color: rgba($color-text, 0.05);
-    @include hover-zoom;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: rgba($color-text, 0.05);
+  @include hover-zoom;
 }
 
 .weather-card__detail-label {
-    font-size: 1.125rem;
-    color: $color-text-muted;
-    hyphens: auto;
-    overflow-wrap: break-word;
+  font-size: 1.125rem;
+  color: $color-text-muted;
+  hyphens: auto;
+  overflow-wrap: break-word;
 }
 
 .weather-card__detail-value {
-    margin: 0;
-    font-weight: 700;
+  margin: 0;
+  font-weight: 700;
 }
