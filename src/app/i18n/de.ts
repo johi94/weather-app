@@ -1,0 +1,53 @@
+import { Translations } from './es';
+
+export const de: Translations = {
+  header: {
+    logoAlt: 'WeatherApp-Logo',
+    searchPlaceholder: 'Stadt suchen…',
+    searchLabel: 'Stadt suchen',
+    searchButton: 'Suchen',
+    invalidCity: 'Ungültige Stadt.',
+  },
+  card: {
+    feelsLike: 'Gefühlt',
+    notFound: 'Die Suche ergab keine Treffer.',
+    loading: 'Wird geladen…',
+    humidity: 'Luftfeuchtigkeit',
+    wind: 'Wind',
+    uvIndex: 'UV-Index',
+    cloudCover: 'Bewölkung',
+    precipitation: 'Niederschlag',
+    pressure: 'Luftdruck',
+    sunrise: 'Sonnenaufgang',
+    sunset: 'Sonnenuntergang',
+  },
+  forecast: {
+    title: 'Vorhersage',
+  },
+  map: {
+    clouds: 'Wolken',
+    rain: 'Regen',
+  },
+    weather: {
+    clear: 'Klar',
+    mainlyClear: 'Überwiegend klar',
+    partlyCloudy: 'Teilweise bewölkt',
+    overcast: 'Bedeckt',
+    fog: 'Nebel',
+    drizzle: 'Nieselregen',
+    rain: 'Regen',
+    snow: 'Schnee',
+    showers: 'Regenschauer',
+    snowShowers: 'Schneeschauer',
+    thunderstorm: 'Gewitter',
+    unknown: 'Unbekannt',
+  },
+  uv: {
+    low: 'Niedrig',
+    moderate: 'Mäßig',
+    high: 'Hoch',
+    veryHigh: 'Sehr hoch',
+    extreme: 'Extrem',
+  },
+  windDirections: ['N', 'NO', 'O', 'SO', 'S', 'SW', 'W', 'NW'],
+};
