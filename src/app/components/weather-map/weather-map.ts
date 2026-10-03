@@ -24,6 +24,8 @@ const RADAR_ATTRIBUTION = '<a href="https://www.rainviewer.com/">RainViewer</a>'
 const CLOUDS_URL = '/api/clouds.php?z={z}&x={x}&y={y}';
 const CLOUDS_OPACITY = 0.8;
 const CLOUDS_ATTRIBUTION = '<a href="https://openweathermap.org/">OpenWeatherMap</a>';
+/** CSS class that shows the layer list; see `vendors/_leaflet.scss`. */
+const LAYERS_OPEN_CLASS = 'is-open';
 
 @Component({
   selector: 'app-weather-map',
@@ -59,6 +61,9 @@ export class WeatherMap {
     L.tileLayer(TILE_URL, { attribution: ATTRIBUTION }).addTo(this.map);
     this.updateLayersControl(this.languageStore.t().map);
     this.loadRainLayer();
+    this.map.on('click', () =>
+      this.layersControl?.getContainer()?.classList.remove(LAYERS_OPEN_CLASS),
+    );
     this.moveTo(this.store.currentCity());
     this.destroyRef.onDestroy(() => this.map?.remove());
   }
@@ -78,6 +83,7 @@ export class WeatherMap {
   /**
    * Rebuilds the layer control with translated layer names.
    * Leaflet cannot rename layers, so the control is replaced; active layers stay on the map.
+   * The list is always rendered (`collapsed: false`) and shown or hidden via `useClickToggle`.
    * @param labels Layer names of the current language.
    */
   private updateLayersControl(labels: Translations['map']) {
@@ -86,8 +92,23 @@ export class WeatherMap {
     const overlays: L.Control.LayersObject = { [labels.clouds]: this.clouds };
     if (this.rain) overlays[labels.rain] = this.rain;
     this.layersControl = L.control
-      .layers(undefined, overlays, { position: 'bottomleft' })
+      .layers(undefined, overlays, { position: 'bottomleft', collapsed: false })
       .addTo(this.map);
+    this.useClickToggle(this.layersControl, labels.layers);
+  }
+
+  /**
+   * Opens and closes the layer list on click instead of on hover,
+   * so it works the same with mouse, keyboard and touch.
+   * @param control The layer control that was just added to the map.
+   * @param label Translated name for the toggle's tooltip and screen readers.
+   */
+  private useClickToggle(control: L.Control.Layers, label: string) {
+    const container = control.getContainer()!;
+    const toggle = container.querySelector<HTMLElement>('.leaflet-control-layers-toggle')!;
+    toggle.title = label;
+    toggle.setAttribute('aria-label', label);
+    L.DomEvent.on(toggle, 'click', () => container.classList.toggle(LAYERS_OPEN_CLASS));
   }
 
   /**

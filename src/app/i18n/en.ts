@@ -27,6 +27,7 @@ export const en: Translations = {
     title: 'Forecast',
   },
   map: {
+    layers: 'Layers',
     clouds: 'Clouds',
     rain: 'Rain',
   },

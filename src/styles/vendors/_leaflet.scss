@@ -46,3 +46,21 @@
     }
   }
 }
+
+/* Layer control opens on click (see WeatherMap.useClickToggle) instead of on hover. */
+.leaflet-control-layers-expanded {
+  display: flex;
+  flex-direction: column-reverse;
+
+  .leaflet-control-layers-toggle {
+    display: block;
+  }
+
+  &:not(.is-open) {
+    padding: 0;
+
+    .leaflet-control-layers-list {
+      display: none;
+    }
+  }
+}

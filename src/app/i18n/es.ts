@@ -26,6 +26,7 @@ export const es = {
     title: 'Pronóstico',
   },
   map: {
+    layers: 'Capas',
     clouds: 'Nubes',
     rain: 'Lluvia',
   },

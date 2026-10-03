@@ -27,6 +27,7 @@ export const de: Translations = {
     title: 'Vorhersage',
   },
   map: {
+    layers: 'Ebenen',
     clouds: 'Wolken',
     rain: 'Regen',
   },
