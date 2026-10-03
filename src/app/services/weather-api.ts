@@ -5,6 +5,7 @@ import { WeatherResponse } from '../models/weather';
 import { RadarResponse } from '../models/radar';
 import { City, Coordinates, GeocodingResponse } from '../models/city';
 import { ReverseGeocodeResponse } from '../models/reverse-geocode';
+import { Language } from '../i18n/language';
 
 const FORECAST_URL = 'https://api.open-meteo.com/v1/forecast';
 const GEOCODING_URL = 'https://geocoding-api.open-meteo.com/v1/search';
@@ -33,13 +34,14 @@ export class WeatherApi {
     });
   }
 
-  searchCity(name: string) {
+  searchCity(name: string, language: Language) {
     return this.http
       .get<GeocodingResponse>(GEOCODING_URL, {
-        params: { name, count: 1, language: 'es' },
+        params: { name, count: 1, language },
       })
       .pipe(map((response) => response.results?.[0]));
   }
+
 
   getRadarTileUrl() {
     return this.http.get<RadarResponse>(RADAR_URL).pipe(
@@ -50,10 +52,10 @@ export class WeatherApi {
     );
   }
 
-  reverseGeocode(coords?: Coordinates) {
+  reverseGeocode(language: Language, coords?: Coordinates) {
     return this.http
       .get<ReverseGeocodeResponse>(REVERSE_GEOCODE_URL, {
-        params: { ...coords, localityLanguage: 'es' },
+        params: { ...coords, localityLanguage: language },
       })
       .pipe(
         map((response): City => ({

@@ -63,7 +63,7 @@ export class WeatherStore {
 
   private async locateUser() {
     const coords = await getBrowserCoords();
-    this.weatherApi.reverseGeocode(coords).subscribe({
+    this.weatherApi.reverseGeocode(this.languageStore.language(), coords).subscribe({
       next: (city) => this.useStartCity(city),
       error: () => this.useStartCity(DEFAULT_CITY),
     });
@@ -74,7 +74,7 @@ export class WeatherStore {
   }
 
   search(name: string) {
-  this.weatherApi.searchCity(name).subscribe((city) => {
+  this.weatherApi.searchCity(name, this.languageStore.language()).subscribe((city) => {
     this.searchFailed.set(!city);
     if (city) this.selectedCity.set(city);
   });
