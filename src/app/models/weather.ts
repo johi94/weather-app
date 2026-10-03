@@ -12,6 +12,7 @@ export interface CurrentWeather {
   pressure_msl: number;
 }
 
+/** One list per value with one entry per day; the same index always belongs to the same day. */
 export interface DailyWeather {
   time: string[];
   sunrise: string[];
@@ -27,6 +28,7 @@ export interface WeatherResponse {
   daily: DailyWeather;
 }
 
+/** One forecast day, combined from the daily lists and prepared for display. */
 export interface ForecastDay {
   date: string;
   weatherCode: number;

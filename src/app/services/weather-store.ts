@@ -19,6 +19,7 @@ const DEFAULT_CITY: City = {
 export class WeatherStore {
   private readonly weatherApi = inject(WeatherApi);
   private readonly languageStore = inject(LanguageStore);
+  /** `undefined` until the start location is known; the UI shows a loading state meanwhile. */
   private readonly selectedCity = signal<City | undefined>(undefined);
   private readonly searchFailed = signal(false);
 
@@ -32,6 +33,7 @@ export class WeatherStore {
   readonly weather = this.weatherResource.value;
   readonly notFound = this.searchFailed.asReadonly();
   readonly currentCity = this.selectedCity.asReadonly();
+  /** `DecimalPipe` format for temperatures: whole numbers without decimals. */
   readonly temperatureFormat = '1.0-0';
   
   /** Forecast for the next days as one object per day; today is skipped. */
@@ -51,6 +53,7 @@ export class WeatherStore {
     .slice(1);
   });
 
+  /** Icon and translated description of the weather right now. */
   readonly currentConditions = computed(() => {
     const weather = this.weather();
     return weather

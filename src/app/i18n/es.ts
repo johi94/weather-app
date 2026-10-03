@@ -1,5 +1,6 @@
 export const es = {
   header: {
+    /** Receives the app name, so each language can place it in its own word order. */
     logoAlt: (name: string) => `Logotipo de ${name}`,
     searchPlaceholder: 'Buscar ciudad…',
     searchLabel: 'Buscar ciudad',
@@ -52,4 +53,5 @@ export const es = {
   windDirections: ['N', 'NE', 'E', 'SE', 'S', 'SO', 'O', 'NO'],
 };
 
+/** Shape every language must match; derived from Spanish as the source language. */
 export type Translations = typeof es;

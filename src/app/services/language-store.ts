@@ -30,6 +30,7 @@ export class LanguageStore {
   /** All texts of the current language. Updates automatically when the language changes. */
   readonly t = computed(() => TRANSLATIONS[this.current()]);
 
+  /** On every language change: update `<html lang>` (screen readers, hyphenation) and save the choice. */
   constructor() {
     effect(() => {
       const language = this.current();
