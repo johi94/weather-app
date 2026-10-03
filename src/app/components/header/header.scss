@@ -9,7 +9,6 @@
 .header__inner {
     display: flex;
     align-items: center;
-    padding-bottom: 1.75rem;
 }
 
 .header__brand {
@@ -35,6 +34,7 @@
     align-items: center;
     gap: 8px 16px;
     min-width: 0;
+        padding-bottom: 3.5rem;
 }
 
 .header__search {
@@ -113,7 +113,7 @@
     right: 16px;
     display: flex;
     gap: 4px;
-    margin-top: 6px;
+    margin-top: 1.75rem;
 }
 
 .header__language {

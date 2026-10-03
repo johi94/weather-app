@@ -10,7 +10,7 @@ $color-surface: #1a1a1a;
 $color-rain: #3b82c4;
 $color-overlay: rgba(0, 0, 0, 0.4);
 
-$bar-height: 15dvh;
+$bar-height: max(15dvh, 11rem);
 
 $breakpoints: (
   mobile: 600px,
