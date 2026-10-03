@@ -1,17 +1,17 @@
 <header class="header">
   <div class="header__inner container">
     <div class="header__brand">
-      <img src="/images/logo.png" alt="Logotipo de WeatherApp" class="header__logo" />
+      <img src="/images/logo.png" [alt]="t().header.logoAlt" class="header__logo" />
       <div class="header__controls">
         <form class="header__search" (submit)="search($event)">
           <input
             type="text"
             class="header__search-input"
-            placeholder="Buscar ciudad…"
-            aria-label="Buscar ciudad"
+            [placeholder]="t().header.searchPlaceholder"
+            [attr.aria-label]="t().header.searchLabel"
             [formControl]="query"
           />
-          <button type="submit" class="header__search-button" aria-label="Buscar">
+          <button type="submit" class="header__search-button" [attr.aria-label]="t().header.searchButton">
             <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
               <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2" />
               <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
@@ -19,7 +19,7 @@
           </button>
           @if (invalidInput()) {
             <p class="header__search-hint" role="alert">
-              Ciudad no válida.
+              {{ t().header.invalidCity }}
             </p>
           }
         </form>

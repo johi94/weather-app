@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { AbstractControl, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WeatherStore } from '../../services/weather-store';
+import { LanguageStore } from '../../services/language-store';
 
 const CITY_PATTERN = /^[\p{L}\s.'-]+$/u;
 const REPEATED_CHARS = /^(.)\1+$/i;
@@ -18,7 +19,9 @@ function notRepeated(control: AbstractControl) {
 })
 export class Header {
   private readonly store = inject(WeatherStore);
+  private readonly languageStore = inject(LanguageStore);
 
+  protected readonly t = this.languageStore.t;
   protected readonly city = this.store.city;
   protected readonly weather = this.store.weather;
   protected readonly currentConditions = this.store.currentConditions;

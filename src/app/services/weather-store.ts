@@ -5,6 +5,7 @@ import { City } from '../models/city';
 import { ForecastDay } from '../models/weather';
 import { describeWeather } from '../utils/weather-code';
 import { getBrowserCoords } from '../utils/browser-location';
+import { LanguageStore } from './language-store';
 
 const DEFAULT_CITY: City = {
   name: 'Puebla',
@@ -17,6 +18,7 @@ const DEFAULT_CITY: City = {
 @Service()
 export class WeatherStore {
   private readonly weatherApi = inject(WeatherApi);
+  private readonly languageStore = inject(LanguageStore);
   private readonly selectedCity = signal<City | undefined>(undefined);
   private readonly searchFailed = signal(false);
 
@@ -34,11 +36,13 @@ export class WeatherStore {
   
   readonly forecast = computed<ForecastDay[]>(() => {
     const daily = this.weather()?.daily;
+    const labels = this.languageStore.t().weather;
     if (!daily) return [];
-    return daily.time.map((date, i) => ({
-      date,
-      weatherCode: daily.weather_code[i],
-      ...describeWeather(daily.weather_code[i]),
+    return daily.time
+      .map((date, i) => ({
+        date,
+        weatherCode: daily.weather_code[i],
+        ...describeWeather(daily.weather_code[i], labels),
       max: daily.temperature_2m_max[i],
       min: daily.temperature_2m_min[i],
       rainChance: daily.precipitation_probability_max[i],
@@ -48,7 +52,9 @@ export class WeatherStore {
 
   readonly currentConditions = computed(() => {
     const weather = this.weather();
-    return weather ? describeWeather(weather.current.weather_code) : undefined;
+    return weather
+      ? describeWeather(weather.current.weather_code, this.languageStore.t().weather)
+      : undefined;
   });
 
   constructor() {
@@ -74,4 +80,3 @@ export class WeatherStore {
   });
 }
 }
-

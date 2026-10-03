@@ -1,25 +1,27 @@
-import { Component, LOCALE_ID, computed, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { WeatherStore } from '../../services/weather-store';
 import { WeatherResponse } from '../../models/weather';
 import { describeUv, describeWindDirection } from '../../utils/weather-details';
+import { LanguageStore } from '../../services/language-store';
+import { Translations } from '../../i18n/es';
 
 const PLACEHOLDER = '–';
 
 interface WeatherDetail {
-  label: string;
-  format: (data: WeatherResponse, locale: string) => string;
+  labelKey: keyof Translations['card'];
+  format: (data: WeatherResponse, locale: string, t: Translations) => string;
 }
 
 const DETAILS: WeatherDetail[] = [
-  { label: 'Humedad', format: ({ current }) => `${current.relative_humidity_2m} %` },
-  { label: 'Viento', format: ({ current }) => `${Math.round(current.wind_speed_10m)} km/h ${describeWindDirection(current.wind_direction_10m)}` },
-  { label: 'Índice UV', format: ({ current }) => `${Math.round(current.uv_index)} · ${describeUv(current.uv_index)}` },
-  { label: 'Nubosidad', format: ({ current }) => `${current.cloud_cover} %` },
-  { label: 'Precipitación', format: ({ current }, locale) => `${current.precipitation.toLocaleString(locale)} mm` },
-  { label: 'Presión', format: ({ current }) => `${Math.round(current.pressure_msl)} hPa` },
-  { label: 'Amanecer', format: ({ daily }) => daily.sunrise[0].slice(11) },
-  { label: 'Atardecer', format: ({ daily }) => daily.sunset[0].slice(11) },
+  { labelKey: 'humidity', format: ({ current }) => `${current.relative_humidity_2m} %` },
+  { labelKey: 'wind', format: ({ current }, _, t) => `${Math.round(current.wind_speed_10m)} km/h ${describeWindDirection(current.wind_direction_10m, t.windDirections)}` },
+  { labelKey: 'uvIndex', format: ({ current }, _, t) => `${Math.round(current.uv_index)} · ${describeUv(current.uv_index, t.uv)}` },
+  { labelKey: 'cloudCover', format: ({ current }) => `${current.cloud_cover} %` },
+  { labelKey: 'precipitation', format: ({ current }, locale) => `${current.precipitation.toLocaleString(locale)} mm` },
+  { labelKey: 'pressure', format: ({ current }) => `${Math.round(current.pressure_msl)} hPa` },
+  { labelKey: 'sunrise', format: ({ daily }) => daily.sunrise[0].slice(11) },
+  { labelKey: 'sunset', format: ({ daily }) => daily.sunset[0].slice(11) },
 ];
 
 @Component({
@@ -30,8 +32,9 @@ const DETAILS: WeatherDetail[] = [
 })
 export class WeatherCard {
   private readonly store = inject(WeatherStore);
-  private readonly locale = inject(LOCALE_ID);
+  private readonly languageStore = inject(LanguageStore);
 
+  protected readonly t = this.languageStore.t;
   protected readonly city = this.store.city;
   protected readonly weather = this.store.weather;
   protected readonly currentConditions = this.store.currentConditions;
@@ -41,9 +44,11 @@ export class WeatherCard {
 
   protected readonly details = computed(() => {
     const data = this.weather();
-    return DETAILS.map(({ label, format }) => ({
-      label,
-      value: data ? format(data, this.locale) : PLACEHOLDER,
+    const t = this.t();
+    return DETAILS.map(({ labelKey, format }) => ({
+      label: t.card[labelKey],
+      value: data ? format(data, this.languageStore.language(), t) : PLACEHOLDER,
     }));
   });
+
 }

@@ -1,18 +1,18 @@
-const UV_LEVELS: [number, string][] = [
-  [2, 'Bajo'],
-  [5, 'Moderado'],
-  [7, 'Alto'],
-  [10, 'Muy alto'],
+import { Translations } from '../i18n/es';
+
+const UV_LEVELS: [number, keyof Translations['uv']][] = [
+  [2, 'low'],
+  [5, 'moderate'],
+  [7, 'high'],
+  [10, 'veryHigh'],
 ];
 
-const WIND_DIRECTIONS = ['N', 'NE', 'E', 'SE', 'S', 'SO', 'O', 'NO'];
-
-export function describeUv(uv: number) {
+export function describeUv(uv: number, labels: Translations['uv']) {
   const level = Math.round(uv);
-  return UV_LEVELS.find(([max]) => level <= max)?.[1] ?? 'Extremo';
+  return labels[UV_LEVELS.find(([max]) => level <= max)?.[1] ?? 'extreme'];
 }
 
-export function describeWindDirection(degrees: number) {
-  const step = 360 / WIND_DIRECTIONS.length;
-  return WIND_DIRECTIONS[Math.round(degrees / step) % WIND_DIRECTIONS.length];
+export function describeWindDirection(degrees: number, directions: string[]) {
+  const step = 360 / directions.length;
+  return directions[Math.round(degrees / step) % directions.length];
 }
