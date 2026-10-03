@@ -13,6 +13,7 @@ export const es = {
     loading: 'Cargando…',
     humidity: 'Humedad',
     wind: 'Viento',
+    windGusts: 'Ráfagas',
     uvIndex: 'Índice UV',
     cloudCover: 'Nubosidad',
     precipitation: 'Precipitación',

@@ -24,7 +24,7 @@ export class WeatherApi {
         longitude,
         current:
           'temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,' +
-          'wind_speed_10m,wind_direction_10m,uv_index,cloud_cover,precipitation,pressure_msl',
+          'wind_speed_10m,wind_direction_10m,wind_gusts_10m,uv_index,cloud_cover,precipitation,pressure_msl',
         daily:
           'sunrise,sunset,weather_code,temperature_2m_max,temperature_2m_min,' +
           'precipitation_probability_max',

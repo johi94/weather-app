@@ -16,6 +16,7 @@ interface WeatherDetail {
 const DETAILS: WeatherDetail[] = [
   { labelKey: 'humidity', format: ({ current }) => `${current.relative_humidity_2m} %` },
   { labelKey: 'wind', format: ({ current }, _, t) => `${Math.round(current.wind_speed_10m)} km/h ${describeWindDirection(current.wind_direction_10m, t.windDirections)}` },
+  { labelKey: 'windGusts', format: ({ current }) => `${Math.round(current.wind_gusts_10m)} km/h` },
   { labelKey: 'uvIndex', format: ({ current }, _, t) => `${Math.round(current.uv_index)} · ${describeUv(current.uv_index, t.uv)}` },
   { labelKey: 'cloudCover', format: ({ current }) => `${current.cloud_cover} %` },
   { labelKey: 'precipitation', format: ({ current }, locale) => `${current.precipitation.toLocaleString(locale)} mm` },

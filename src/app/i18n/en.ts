@@ -15,6 +15,7 @@ export const en: Translations = {
     loading: 'Loading…',
     humidity: 'Humidity',
     wind: 'Wind',
+    windGusts: 'Gusts',
     uvIndex: 'UV index',
     cloudCover: 'Cloud cover',
     precipitation: 'Precipitation',

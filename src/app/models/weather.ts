@@ -5,6 +5,7 @@ export interface CurrentWeather {
   weather_code: number;
   wind_speed_10m: number;
   wind_direction_10m: number;
+  wind_gusts_10m: number;
   uv_index: number;
   cloud_cover: number;
   precipitation: number;
